@@ -1,25 +1,27 @@
 import React, { lazy } from 'react';
-import { useSelector } from 'react-redux';
 import { Switch } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import PageLayout from '../layouts/PageLayout';
+import PageRoute from './PageRoute';
 
-import AuthLayout from '../layouts/AuthLayout';
-import NoAuthRoute from './NoAuthRoute';
-
-const Login = lazy(() => import('pages/Login'));
+const Home = lazy(() => import('pages/Home'));
+const About = lazy(() => import('pages/About'));
 
 const PublicRoute = ({ match }) => {
-  const { loggedIn } = useSelector((state) => state.auth);
-
   return (
     <>
       <Switch>
-        <NoAuthRoute
+        <PageRoute
           exact
-          path="/login"
-          isAuthenticated={loggedIn}
-          layout={AuthLayout}
-          component={Login}
+          path={`${match.path}/`}
+          layout={PageLayout}
+          component={Home}
+        />
+        <PageRoute
+          exact
+          path={`${match.path}/home`}
+          layout={PageLayout}
+          component={About}
         />
       </Switch>
     </>
@@ -27,7 +29,7 @@ const PublicRoute = ({ match }) => {
 };
 
 PublicRoute.propTypes = {
-  match: PropTypes.object.isRequired,
+  match: PropTypes.object,
 };
 
 export default PublicRoute;

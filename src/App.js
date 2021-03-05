@@ -1,13 +1,6 @@
 import React from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  withRouter,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PrivateRoute from './routes/PrivateRoute';
 import PublicRoute from './routes/PublicRoute';
 
 const Scroll = (props) => {
@@ -33,9 +26,7 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop>
         <Switch>
-          <Redirect exact from="/" to="/login" />
-          <Route path="/app" component={PrivateRoute} />
-          <Route path="/" component={PublicRoute} />
+          <Route exact path="/" component={PublicRoute} />
         </Switch>
       </ScrollToTop>
     </BrowserRouter>

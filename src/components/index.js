@@ -1,4 +1,3 @@
 export * from './Loader';
-export * from './Navigation';
+export * from './MovieSelect';
 export * from './Footer';
-export * from './Header';
