@@ -13,11 +13,16 @@ const authReducer = (state = initialState.movies, action) => {
         ...state,
         list: [],
       };
-    // case movieConstants.LOGOUT_SUCCESS:
-    //   return {
-    //     ...state,
-    //     loggedIn: false,
-    //   };
+    case movieConstants.SET_MOVIE_SUCCESS:
+      return {
+        ...state,
+        current: action.payload,
+      };
+    case movieConstants.SET_MOVIE_FAILURE:
+      return {
+        ...state,
+        current: {},
+      };
     default:
       return state;
   }

@@ -20,9 +20,26 @@ const getMoviesFailure = (error) => ({
 export const getMovies = () => async (dispatch) => {
   try {
     const { data } = await Axios.get(proxy('films'));
-    console.log(data);
     dispatch(getMoviesSuccess(JSON.parse(data.contents)));
   } catch (error) {
     dispatch(getMoviesFailure(error));
+  }
+};
+
+const setCurrentMovieSuccess = (payload) => ({
+  type: movieConstants.SET_MOVIE_SUCCESS,
+  payload,
+});
+
+const setCurrentMovieFailure = (error) => ({
+  type: movieConstants.SET_MOVIE_FAILURE,
+  payload: error,
+});
+
+export const setCurrentMovie = (movie) => async (dispatch) => {
+  try {
+    dispatch(setCurrentMovieSuccess(movie));
+  } catch (error) {
+    dispatch(setCurrentMovieFailure(error));
   }
 };

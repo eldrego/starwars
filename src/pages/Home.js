@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getMovies } from 'redux/actions';
-import { MovieSelect } from 'components';
+import { MovieSelect, OpenCrawl, CharacterTable } from 'components';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,12 +20,15 @@ const Home = () => {
             <MovieSelect />
           </div>
         </div>
-        <div className="row">
-          <h3 className="heading">Movie opening crawl</h3>
-        </div>
+        {/* <div className="row">
+          <OpenCrawl />
+        </div> */}
       </div>
       <div className="container">
-        <p className="paragraph">This is a generic page</p>
+        <CharacterTable />
+        <p className="paragraph">
+          This is a table for characters in the selected movie
+        </p>
       </div>
     </section>
   );
