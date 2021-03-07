@@ -2,9 +2,9 @@ import React, { useEffect, useCallback, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector, useDisptach, useDispatch } from 'react-redux';
 import { getCharacter, resetCharacters } from 'redux/actions';
-import { formatHeight } from 'utils';
+import Table from './Table';
 
-export const CharacterTable = (props) => {
+export const CharacterListing = (props) => {
   const [movieKey, setMovieKey] = useState();
   const [actorList, setActorList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -66,11 +66,9 @@ export const CharacterTable = (props) => {
         return gender.length > 0 ? item.gender === gender : item.gender;
       });
 
-      console.log({ filteredList });
-
       setFilteredList(filtered);
     }
-  }, [filteredList, actorList, getLength, gender]);
+  }, [actorList, getLength, gender]);
 
   return (
     <section className="py-4">
@@ -89,46 +87,9 @@ export const CharacterTable = (props) => {
           </select>
         </div>
       </div>
-      <div className="table-responsive">
-        <table className="table">
-          <thead>
-            <tr>
-              <th scope="col">Name</th>
-              <th scope="col">Gender</th>
-              <th scope="col">Height</th>
-            </tr>
-          </thead>
-          <tbody>
-            {filteredList &&
-              filteredList.length > 0 &&
-              filteredList.map((actor) => {
-                return (
-                  <tr key={actor.name}>
-                    <th scope="row">{actor.name}</th>
-                    <td>{actor.gender}</td>
-                    <td>{formatHeight(actor.height)}</td>
-                  </tr>
-                );
-              })}
-          </tbody>
-
-          <tfoot>
-            <tr>
-              <th scope="col" colSpan="2">
-                Chracter count {filteredList && filteredList.length}
-              </th>
-              <th scope="col">
-                {' '}
-                {filteredList &&
-                  filteredList.length &&
-                  `Height ${total && formatHeight(total)}`}
-              </th>
-            </tr>
-          </tfoot>
-        </table>
-      </div>
+      <Table filteredList={filteredList} total={total} />
     </section>
   );
 };
 
-CharacterTable.propTypes = {};
+CharacterListing.propTypes = {};

@@ -6,21 +6,29 @@ import starWarsImage from '../assets/images/star_wars_logo.png';
 export const OpenCrawl = (props) => {
   const { current } = useSelector((state) => state.movies);
 
+  // console.log(current);
+
   return (
     <>
-      {current ? (
+      {current && Object.keys(current).length > 0 ? (
         <>
-          <div className="fade"></div>
-          <section className="star-wars">
+          {/* <div className="fade"></div> */}
+          <section className="crawler">
             <div className="crawl">
               <div className="title">
-                {/* <p>Episode IV</p> */}
                 <h1>{current.title}</h1>
               </div>
-
               <p>{current.opening_crawl}</p>
             </div>
           </section>
+          {/* <section className="star-wars">
+            <div className="crawl">
+              <div className="title">
+               
+              </div>
+              
+            </div>
+          </section> */}
         </>
       ) : (
         <div className="d-flex w-100 justify-content-center align-items-center pt-5">

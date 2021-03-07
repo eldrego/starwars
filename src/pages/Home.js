@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getMovies } from 'redux/actions';
-import { MovieSelect, OpenCrawl, CharacterTable } from 'components';
+import { MovieSelect, OpenCrawl, CharacterListing } from 'components';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -20,12 +20,12 @@ const Home = () => {
             <MovieSelect />
           </div>
         </div>
-        {/* <div className="row">
+        <div className="row">
           <OpenCrawl />
-        </div> */}
+        </div>
       </div>
       <div className="container">
-        <CharacterTable />
+        <CharacterListing />
         <p className="paragraph">
           This is a table for characters in the selected movie
         </p>
