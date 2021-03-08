@@ -17,6 +17,19 @@ const Table = ({ ...props }) => {
 
   const compareBy = (key, ascending) => {
     let reverse = ascending ? 1 : -1;
+
+    if (key === 'height') {
+      if (ascending) {
+        return (a, b) => {
+          return b[key] - a[key];
+        };
+      } else {
+        return (a, b) => {
+          return a[key] - b[key];
+        };
+      }
+    }
+
     return function (a, b) {
       if (a[key] < b[key]) return -1 * reverse;
       if (a[key] > b[key]) return 1 * reverse;
@@ -77,10 +90,14 @@ const Table = ({ ...props }) => {
           <tbody>
             {entityList && entityList.length > 0 ? (
               entityList.map((actor) => {
+                const gender =
+                  actor.gender !== 'n/a'
+                    ? actor.gender.charAt(0)
+                    : actor.gender;
                 return (
                   <tr key={actor.name}>
                     <th scope="row">{actor.name}</th>
-                    <td>{actor.gender}</td>
+                    <td className="text-capitalize">{gender}</td>
                     <td>{formatHeight(actor.height)}</td>
                   </tr>
                 );

@@ -13,7 +13,7 @@ export const OpenCrawl = (props) => {
               {current && Object.keys(current).length > 0 && current.title}
             </h1>
           </div>
-          <p className="anim-typewriter text-center">
+          <p className="text-center">
             {current &&
               Object.keys(current).length > 0 &&
               current.opening_crawl}

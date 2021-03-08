@@ -80,7 +80,7 @@ export const CharacterListing = (props) => {
             value={gender}
             onChange={(event) => setGender(event.target.value)}
           >
-            <option value="">Filter by Gender</option>
+            <option value="">All Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
             <option value="hermaphrodite">hermaphrodite</option>
