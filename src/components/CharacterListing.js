@@ -71,32 +71,31 @@ export const CharacterListing = (props) => {
   }, [actorList, getLength, gender]);
 
   return (
-    <>
-      {filteredList && filteredList.length > 0 && (
-        <section className="py-4">
-          <div className="d-flex justify-content-between align-items-center">
-            <h4 className="mb-3">Character Listing</h4>
-            <div className="form-group">
-              <select
-                className="form-control"
-                value={gender}
-                onChange={(event) => setGender(event.target.value)}
-              >
-                <option value="">Filter by Gender</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-                <option value="hermaphrodite">hermaphrodite</option>
-              </select>
-            </div>
-          </div>
-          {loading ? (
-            <LoaderEllipsis />
-          ) : (
-            <Table filteredList={filteredList} total={total} />
-          )}
-        </section>
+    <section className="py-4">
+      <div className="d-flex justify-content-between align-items-center">
+        <h4 className="mb-3">Character Listing</h4>
+        <div className="form-group">
+          <select
+            className="form-control"
+            value={gender}
+            onChange={(event) => setGender(event.target.value)}
+          >
+            <option value="">All Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="hermaphrodite">hermaphrodite</option>
+          </select>
+        </div>
+      </div>
+
+      {loading ? (
+        <LoaderEllipsis />
+      ) : (
+        <>
+          {filteredList && <Table filteredList={filteredList} total={total} />}
+        </>
       )}
-    </>
+    </section>
   );
 };
 

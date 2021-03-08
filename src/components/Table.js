@@ -10,10 +10,26 @@ const Table = ({ ...props }) => {
     if (filteredList && filteredList.length > 0) {
       setEntityListing(filteredList);
     }
+    return () => {
+      setEntityListing([]);
+    };
   }, [filteredList]);
 
   const compareBy = (key, ascending) => {
     let reverse = ascending ? 1 : -1;
+
+    if (key === 'height') {
+      if (ascending) {
+        return (a, b) => {
+          return b[key] - a[key];
+        };
+      } else {
+        return (a, b) => {
+          return a[key] - b[key];
+        };
+      }
+    }
+
     return function (a, b) {
       if (a[key] < b[key]) return -1 * reverse;
       if (a[key] > b[key]) return 1 * reverse;
@@ -26,8 +42,6 @@ const Table = ({ ...props }) => {
     listCopy.sort(compareBy(key, direction));
     setEntityListing(listCopy);
   };
-
-  console.log(filteredList);
 
   return (
     <section className="">
@@ -74,32 +88,43 @@ const Table = ({ ...props }) => {
             </tr>
           </thead>
           <tbody>
-            {entityList &&
-              entityList.length > 0 &&
+            {entityList && entityList.length > 0 ? (
               entityList.map((actor) => {
+                const gender =
+                  actor.gender !== 'n/a'
+                    ? actor.gender.charAt(0)
+                    : actor.gender;
                 return (
                   <tr key={actor.name}>
                     <th scope="row">{actor.name}</th>
-                    <td>{actor.gender}</td>
+                    <td className="text-capitalize">{gender}</td>
                     <td>{formatHeight(actor.height)}</td>
                   </tr>
                 );
-              })}
+              })
+            ) : (
+              <tr>
+                <th scope="row" colSpan="3">
+                  <p className="text-center"> No content</p>
+                </th>
+              </tr>
+            )}
           </tbody>
-
-          <tfoot>
-            <tr>
-              <th scope="col" colSpan="2">
-                Chracter count {filteredList && filteredList.length}
-              </th>
-              <th scope="col">
-                {' '}
-                {filteredList &&
-                  filteredList.length &&
-                  `Total Height ${total && formatHeight(total)}`}
-              </th>
-            </tr>
-          </tfoot>
+          {filteredList && filteredList.length > 0 && (
+            <tfoot>
+              <tr>
+                <th scope="col" colSpan="2">
+                  Chracter count {filteredList && filteredList.length}
+                </th>
+                <th scope="col">
+                  {' '}
+                  {filteredList &&
+                    filteredList.length &&
+                    `Total Height ${total && formatHeight(total)}`}
+                </th>
+              </tr>
+            </tfoot>
+          )}
         </table>
       </div>
     </section>
