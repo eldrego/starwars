@@ -1,14 +1,10 @@
-import React from 'react';
-import {
-  BrowserRouter,
-  Route,
-  Switch,
-  withRouter,
-  Redirect,
-} from 'react-router-dom';
+import React, { lazy } from 'react';
+import { BrowserRouter, Switch, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PrivateRoute from './routes/PrivateRoute';
-import PublicRoute from './routes/PublicRoute';
+import PageLayout from './layouts/PageLayout';
+import PageRoute from './layouts/PageRoute';
+
+const Home = lazy(() => import('pages/Home'));
 
 const Scroll = (props) => {
   React.useEffect(() => {
@@ -33,9 +29,7 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop>
         <Switch>
-          <Redirect exact from="/" to="/login" />
-          <Route path="/app" component={PrivateRoute} />
-          <Route path="/" component={PublicRoute} />
+          <PageRoute exact path="/" layout={PageLayout} component={Home} />
         </Switch>
       </ScrollToTop>
     </BrowserRouter>
