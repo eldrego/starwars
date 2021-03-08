@@ -1,12 +1,11 @@
-# Create-React-App Redux Starter Kit
+# StarWars
 
-[![Hound](https://img.shields.io/badge/Protected_by-Hound-a873d1.svg)](https://travis-ci.org/eldrego/react-redux-starter-kit)
+[Star Wars](https://moe-starwars.netlify.app)
 
-## Pr0ject Specifications
+## Project Specifications
 
 ### Objective
 - This task is designed to provide an opportunity for you to demonstrate general JavaScript and UI development knowledge in the sense that you: write clean, structured, readable and maintainable code create simple application components and building blocks understand fetching, transforming and aggregating data from external APIs maintain a well designed application state craft a pleasant user experience
-
 
 ### Task
 Create a small app using React that lists the names of Star Wars movies in a dropdown and the opening crawl of the selected movie below the selection along with a list of the characters that appear in that movie.
@@ -48,57 +47,3 @@ This is not a test. This is a chance for us to know you better and your chance t
 After submitting, you will receive feedback as Github issues, might be asked to make some changes, also possibly create or review a pull request.
 
 May the force be with you! :)
-
-## Requirements
-
-- node `8.9.0`
-- npm `^6.0.1`
-
-## Installation
-
-Create a new project based on `react-redux-starter-kit` by doing the following:
-
-```bash
-$ git clone https://github.com/eldrego/react-redux-starter-kit.git <my-project-name>
-$ cd <my-project-name>
-```
-
-Create your .env file and populate the relevant values based on the sample file .env-sample
-
-Install dependencies
-
-```bash
-$ npm install
-$ npm run start      # Compiles and launches application
-```
-
-If everything works, you should get a message indicating so. In development Application will be served on port 8080
-Open the web browser to http://localhost:3000/login
-
-## Project Structure
-
-The project structure presented in this starter kit is outlined below. This structure is only meant to serve as a guide.
-
-```
-├── public                # Transpiled react source code
-└──src                    # React-redux related files
-   ├── __tests__          # Unit tests
-   ├── assets             # Assests - Images, stylesheets and
-   │   ├── fonts          # Custom fonts for the application
-   │   ├── images         # Images
-   │   └── sass           # CSS files
-   ├── components         # Collections of reducers/constants/actions
-   ├── layouts            # Layouts for auth pages and other pages
-   ├── pages              # Collections of landing pages for navigation items
-   ├── redux              # Collections of reducers/constants/actions
-   │   ├── actions        # Actions
-   │   ├── reducers       # Reducers
-   │   ├── constants.js   # Constants file
-   │   └── store.js       # Redux store instance
-   ├── routes             # Route declaration for the application  - private and public routes
-   └── utils              # Utitily functions used in the application
-```
-
-## Contributing
-
-I am more than happy to accept contributions to the project. Contributions can be in the form of feedback, bug reports or even better - pull requests :)
