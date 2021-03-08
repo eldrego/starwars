@@ -88,25 +88,26 @@ const Table = ({ ...props }) => {
             ) : (
               <tr>
                 <th scope="row" colSpan="3">
-                  No content
+                  <p className="text-center"> No content</p>
                 </th>
               </tr>
             )}
           </tbody>
-
-          <tfoot>
-            <tr>
-              <th scope="col" colSpan="2">
-                Chracter count {filteredList && filteredList.length}
-              </th>
-              <th scope="col">
-                {' '}
-                {filteredList &&
-                  filteredList.length &&
-                  `Total Height ${total && formatHeight(total)}`}
-              </th>
-            </tr>
-          </tfoot>
+          {filteredList && filteredList.length > 0 && (
+            <tfoot>
+              <tr>
+                <th scope="col" colSpan="2">
+                  Chracter count {filteredList && filteredList.length}
+                </th>
+                <th scope="col">
+                  {' '}
+                  {filteredList &&
+                    filteredList.length &&
+                    `Total Height ${total && formatHeight(total)}`}
+                </th>
+              </tr>
+            </tfoot>
+          )}
         </table>
       </div>
     </section>

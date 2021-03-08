@@ -1,22 +1,8 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
-// import { LoaderRipple } from 'components';
 
 export const OpenCrawl = (props) => {
-  const [display, setDisplay] = useState(true);
-  // const { current } = useSelector((state) => state.movies);
-  const movies = useSelector((state) => state.movies);
-  const { current } = movies;
-
-  const hideLogo = useCallback(() => {
-    setDisplay(false);
-  }, []);
-
-  useEffect(() => {
-    if (current && Object.keys(current).length > 0 && current.episode_id) {
-      hideLogo();
-    }
-  }, [current, hideLogo]);
+  const { current } = useSelector((state) => state.movies);
 
   return (
     <section className="container opening-crawl mt-3">
