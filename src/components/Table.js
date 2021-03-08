@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { formatHeight } from 'utils';
 
 const Table = ({ ...props }) => {
-  const [sortOption, setSortOption] = useState('up');
+  const [direction, setDirection] = useState(true);
   const [entityList, setEntityListing] = useState([]);
   const { filteredList, total } = props;
 
@@ -13,35 +13,22 @@ const Table = ({ ...props }) => {
     }
   }, [filteredList]);
 
-  const compareBy = (key, direction) => {
-    // console.log(sortTypes[key].fn());
-    // console.log({ direction });
-    // return function (a, b) {
-    //   if (a[key] < b[key]) return -1;
-    //   if (a[key] > b[key]) return 1;
-    //   return 0;
-    // };
+  const compareBy = (key, ascending) => {
+    let reverse = ascending ? 1 : -1;
+    return function (a, b) {
+      if (a[key] < b[key]) return -1 * reverse;
+      if (a[key] > b[key]) return 1 * reverse;
+      return 0;
+    };
   };
 
-  const triggerSort = useCallback(
-    (sortKey) => {
-      let actorsCopy = [...entityList];
-      actorsCopy.sort(compareBy(sortKey, sortOption));
-      console.log(actorsCopy);
-    },
-    [sortOption],
-  );
-
-  const onSortChange = (key) => {
-    let nextSort;
-
-    if (sortOption === 'down') nextSort = 'up';
-    else if (sortOption === 'up') nextSort = 'default';
-    else if (sortOption === 'default') nextSort = 'down';
-
-    setSortOption(nextSort);
-    triggerSort(key);
+  const sortBy = (key) => {
+    let listCopy = [...entityList];
+    listCopy.sort(compareBy(key, direction));
+    setEntityListing(listCopy);
   };
+
+  console.log(filteredList);
 
   return (
     <section className="">
@@ -52,14 +39,39 @@ const Table = ({ ...props }) => {
               <th scope="col">
                 <div
                   onClick={() => {
-                    onSortChange('name');
+                    sortBy('name');
+                    setDirection(!direction);
                   }}
+                  className="sortable"
+                  aria-hidden
                 >
                   Name
                 </div>
               </th>
-              <th scope="col">Gender</th>
-              <th scope="col">Height</th>
+              <th scope="col">
+                <div
+                  onClick={() => {
+                    sortBy('gender');
+                    setDirection(!direction);
+                  }}
+                  className="sortable"
+                  aria-hidden
+                >
+                  Gender
+                </div>
+              </th>
+              <th scope="col">
+                <div
+                  onClick={() => {
+                    sortBy('height');
+                    setDirection(!direction);
+                  }}
+                  className="sortable"
+                  aria-hidden
+                >
+                  Height
+                </div>
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -85,7 +97,7 @@ const Table = ({ ...props }) => {
                 {' '}
                 {filteredList &&
                   filteredList.length &&
-                  `Height ${total && formatHeight(total)}`}
+                  `Total Height ${total && formatHeight(total)}`}
               </th>
             </tr>
           </tfoot>

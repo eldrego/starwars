@@ -1,7 +1,10 @@
-import React from 'react';
-import { BrowserRouter, Route, Switch, withRouter } from 'react-router-dom';
+import React, { lazy } from 'react';
+import { BrowserRouter, Switch, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import PublicRoute from './routes/PublicRoute';
+import PageLayout from './layouts/PageLayout';
+import PageRoute from './layouts/PageRoute';
+
+const Home = lazy(() => import('pages/Home'));
 
 const Scroll = (props) => {
   React.useEffect(() => {
@@ -26,7 +29,7 @@ const App = () => {
     <BrowserRouter>
       <ScrollToTop>
         <Switch>
-          <Route exact path="/" component={PublicRoute} />
+          <PageRoute exact path="/" layout={PageLayout} component={Home} />
         </Switch>
       </ScrollToTop>
     </BrowserRouter>

@@ -30,7 +30,7 @@ export const MovieSelect = (props) => {
   return (
     <form>
       <div className="form-group">
-        <label htmlFor="movieSelect">Please select a movie</label>
+        <p className="pt-3 text-center text-white">Please select a movie</p>
         <DropDown list={films} onChange={setSelectedFilm} handler={'movies'} />
       </div>
     </form>

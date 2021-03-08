@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { getMovies } from 'redux/actions';
 import { MovieSelect, OpenCrawl, CharacterListing } from 'components';
+import starWarsImage from '../assets/images/star_wars_logo.png';
 
 const Home = () => {
   const dispatch = useDispatch();
@@ -19,16 +20,20 @@ const Home = () => {
           <div className="col-md-4">
             <MovieSelect />
           </div>
+          <div className className="col-md-12">
+            <div className="d-flex w-100 justify-content-center align-items-center pt-5">
+              <img className="main-logo" src={starWarsImage} alt="star wars" />
+            </div>
+          </div>
         </div>
+      </div>
+      <div>
         <div className="row">
           <OpenCrawl />
         </div>
       </div>
-      <div className="container">
+      <div className="container character-listing">
         <CharacterListing />
-        <p className="paragraph">
-          This is a table for characters in the selected movie
-        </p>
       </div>
     </section>
   );

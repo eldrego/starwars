@@ -1,39 +1,38 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDispatch } from 'react-redux';
-import starWarsImage from '../assets/images/star_wars_logo.png';
+import React, { useEffect, useState, useCallback } from 'react';
+import { useSelector } from 'react-redux';
+import { LoaderRipple } from 'components';
 
 export const OpenCrawl = (props) => {
+  const [display, setDisplay] = useState(true);
   const { current } = useSelector((state) => state.movies);
 
-  // console.log(current);
+  const hideLogo = useCallback(() => {
+    setDisplay(false);
+  }, []);
+
+  useEffect(() => {
+    if (current && Object.keys(current).length > 0) {
+      hideLogo();
+    }
+  }, [current, hideLogo]);
+
+  console.log(display);
 
   return (
     <>
-      {current && Object.keys(current).length > 0 ? (
-        <>
-          {/* <div className="fade"></div> */}
-          <section className="crawler">
+      {current && Object.keys(current).length > 0 && (
+        <section className="container opening-crawl">
+          <div id="crawler" className="crawler">
             <div className="crawl">
               <div className="title">
-                <h1>{current.title}</h1>
+                <h1 className="text-center">{current.title}</h1>
               </div>
-              <p>{current.opening_crawl}</p>
+              <p className="anim-typewriter text-center">
+                {current.opening_crawl}
+              </p>
             </div>
-          </section>
-          {/* <section className="star-wars">
-            <div className="crawl">
-              <div className="title">
-               
-              </div>
-              
-            </div>
-          </section> */}
-        </>
-      ) : (
-        <div className="d-flex w-100 justify-content-center align-items-center pt-5">
-          <img className="main-logo" src={starWarsImage} alt="star wars" />
-        </div>
+          </div>
+        </section>
       )}
     </>
   );

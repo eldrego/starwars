@@ -3,12 +3,7 @@ import { Route } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { Loader } from 'components';
 
-const PageRoute = ({
-  component: Component,
-  isAuthenticated,
-  layout: Layout,
-  ...rest
-}) => {
+const PageRoute = ({ component: Component, layout: Layout, ...rest }) => {
   return (
     <Route
       {...rest}

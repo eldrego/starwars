@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { useSelector, useDisptach, useDispatch } from 'react-redux';
 import { getCharacter, resetCharacters } from 'redux/actions';
 import Table from './Table';
+import { LoaderEllipsis } from 'components';
 
 export const CharacterListing = (props) => {
   const [movieKey, setMovieKey] = useState();
@@ -13,7 +14,7 @@ export const CharacterListing = (props) => {
 
   const dispatch = useDispatch();
   const movies = useSelector((state) => state.movies);
-  const { current } = movies;
+  const { current, loading } = movies;
 
   const getLength = current && current.characters && current.characters.length;
 
@@ -71,24 +72,32 @@ export const CharacterListing = (props) => {
   }, [actorList, getLength, gender]);
 
   return (
-    <section className="py-4">
-      <div className="d-flex justify-content-between align-items-center">
-        <h4 className="mb-3">Character Listing</h4>
-        <div className="form-group">
-          <select
-            className="form-control"
-            value={gender}
-            onChange={(event) => setGender(event.target.value)}
-          >
-            <option value="">Filter by Gender</option>
-            <option value="male">Male</option>
-            <option value="female">Female</option>
-            <option value="hermaphrodite">hermaphrodite</option>
-          </select>
-        </div>
-      </div>
-      <Table filteredList={filteredList} total={total} />
-    </section>
+    <>
+      {filteredList && filteredList.length > 0 && (
+        <section className="py-4">
+          <div className="d-flex justify-content-between align-items-center">
+            <h4 className="mb-3">Character Listing</h4>
+            <div className="form-group">
+              <select
+                className="form-control"
+                value={gender}
+                onChange={(event) => setGender(event.target.value)}
+              >
+                <option value="">Filter by Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="hermaphrodite">hermaphrodite</option>
+              </select>
+            </div>
+          </div>
+          {loading ? (
+            <LoaderEllipsis />
+          ) : (
+            <Table filteredList={filteredList} total={total} />
+          )}
+        </section>
+      )}
+    </>
   );
 };
 
