@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { formatHeight } from 'utils';
+import PropTypes from 'prop-types';
+import { formatHeight } from '../utils';
 
 const Table = ({ ...props }) => {
   const [direction, setDirection] = useState(true);
@@ -16,21 +17,16 @@ const Table = ({ ...props }) => {
   }, [filteredList]);
 
   const compareBy = (key, ascending) => {
-    let reverse = ascending ? 1 : -1;
+    const reverse = ascending ? 1 : -1;
 
     if (key === 'height') {
       if (ascending) {
-        return (a, b) => {
-          return b[key] - a[key];
-        };
-      } else {
-        return (a, b) => {
-          return a[key] - b[key];
-        };
+        return (a, b) => b[key] - a[key];
       }
+      return (a, b) => a[key] - b[key];
     }
 
-    return function (a, b) {
+    return (a, b) => {
       if (a[key] < b[key]) return -1 * reverse;
       if (a[key] > b[key]) return 1 * reverse;
       return 0;
@@ -38,7 +34,7 @@ const Table = ({ ...props }) => {
   };
 
   const sortBy = (key) => {
-    let listCopy = [...entityList];
+    const listCopy = [...entityList];
     listCopy.sort(compareBy(key, direction));
     setEntityListing(listCopy);
   };
@@ -90,10 +86,7 @@ const Table = ({ ...props }) => {
           <tbody>
             {entityList && entityList.length > 0 ? (
               entityList.map((actor) => {
-                const gender =
-                  actor.gender !== 'n/a'
-                    ? actor.gender.charAt(0)
-                    : actor.gender;
+                const gender = actor.gender !== 'n/a' ? actor.gender.charAt(0) : actor.gender;
                 return (
                   <tr key={actor.name}>
                     <th scope="row">{actor.name}</th>
@@ -118,9 +111,7 @@ const Table = ({ ...props }) => {
                 </th>
                 <th scope="col">
                   {' '}
-                  {filteredList &&
-                    filteredList.length &&
-                    `Total Height ${total && formatHeight(total)}`}
+                  {filteredList && filteredList.length && `Total Height ${total && formatHeight(total)}`}
                 </th>
               </tr>
             </tfoot>
@@ -131,6 +122,14 @@ const Table = ({ ...props }) => {
   );
 };
 
-Table.propTypes = {};
+Table.defaultProps = {
+  filteredList: [],
+  total: 0,
+};
+
+Table.propTypes = {
+  filteredList: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+  total: PropTypes.number,
+};
 
 export default Table;

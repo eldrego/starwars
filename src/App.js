@@ -15,25 +15,20 @@ const Scroll = (props) => {
 };
 
 Scroll.propTypes = {
-  location: PropTypes.object,
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node,
-  ]),
+  location: PropTypes.oneOfType([PropTypes.object]),
+  children: PropTypes.oneOfType([PropTypes.arrayOf(PropTypes.node), PropTypes.node]),
 };
 
 const ScrollToTop = withRouter(Scroll);
 
-const App = () => {
-  return (
-    <BrowserRouter>
-      <ScrollToTop>
-        <Switch>
-          <PageRoute exact path="/" layout={PageLayout} component={Home} />
-        </Switch>
-      </ScrollToTop>
-    </BrowserRouter>
-  );
-};
+const App = () => (
+  <BrowserRouter>
+    <ScrollToTop>
+      <Switch>
+        <PageRoute exact path="/" layout={PageLayout} component={Home} />
+      </Switch>
+    </ScrollToTop>
+  </BrowserRouter>
+);
 
 export default App;

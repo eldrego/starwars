@@ -1,11 +1,7 @@
 import Axios from 'axios';
 import { movieConstants } from '../constants';
 
-const proxy = (resourceUrl) => {
-  return `https://api.allorigins.win/get?url=${encodeURIComponent(
-    `${resourceUrl}`,
-  )}`;
-};
+const proxy = (resourceUrl) => `https://api.allorigins.win/get?url=${encodeURIComponent(`${resourceUrl}`)}`;
 
 const moviesStart = (payload) => ({
   type: movieConstants.MOVIES_START,
@@ -81,7 +77,6 @@ export const getCharacter = (key, character) => async (dispatch) => {
       }),
     );
   } catch (error) {
-    console.log(error);
     dispatch(getMovieCharacterFailure(error));
   }
 };

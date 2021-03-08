@@ -1,10 +1,10 @@
 import React, { useEffect, useCallback, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { getCharacter, resetCharacters } from 'redux/actions';
+import { getCharacter, resetCharacters } from '../redux/actions';
 import Table from './Table';
-import { LoaderEllipsis } from 'components';
+import { LoaderEllipsis } from './LoaderEllipsis';
 
-export const CharacterListing = (props) => {
+export const CharacterListing = () => {
   const [movieKey, setMovieKey] = useState();
   const [actorList, setActorList] = useState([]);
   const [filteredList, setFilteredList] = useState([]);
@@ -31,6 +31,7 @@ export const CharacterListing = (props) => {
 
   useEffect(() => {
     if (current && Object.keys(current).includes('characters')) {
+      // eslint-disable-next-line camelcase
       const { characters, episode_id } = current;
       setMovieKey(episode_id);
       getMovieCharacters(episode_id, characters);
@@ -47,9 +48,7 @@ export const CharacterListing = (props) => {
   useEffect(() => {
     if (filteredList && filteredList.length > 0) {
       const actorHeight = filteredList.map((item) => {
-        return !isNaN(parseInt(item.height, 10))
-          ? parseInt(item.height, 10)
-          : 0;
+        return !isNaN(parseInt(item.height, 10)) ? parseInt(item.height, 10) : 0;
       });
 
       setTotal(
@@ -75,11 +74,7 @@ export const CharacterListing = (props) => {
       <div className="d-flex justify-content-between align-items-center">
         <h4 className="mb-3">Character Listing</h4>
         <div className="form-group">
-          <select
-            className="form-control"
-            value={gender}
-            onChange={(event) => setGender(event.target.value)}
-          >
+          <select className="form-control" value={gender} onChange={(event) => setGender(event.target.value)}>
             <option value="">All Gender</option>
             <option value="male">Male</option>
             <option value="female">Female</option>
@@ -88,13 +83,7 @@ export const CharacterListing = (props) => {
         </div>
       </div>
 
-      {loading ? (
-        <LoaderEllipsis />
-      ) : (
-        <>
-          {filteredList && <Table filteredList={filteredList} total={total} />}
-        </>
-      )}
+      {loading ? <LoaderEllipsis /> : <>{filteredList && <Table filteredList={filteredList} total={total} />}</>}
     </section>
   );
 };

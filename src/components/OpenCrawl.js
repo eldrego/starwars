@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-export const OpenCrawl = (props) => {
+export const OpenCrawl = () => {
   const { current } = useSelector((state) => state.movies);
 
   return (
@@ -9,15 +9,9 @@ export const OpenCrawl = (props) => {
       <div id="crawler" className="crawler">
         <div className="crawl">
           <div className="title">
-            <h1 className="text-center">
-              {current && Object.keys(current).length > 0 && current.title}
-            </h1>
+            <h1 className="text-center">{current && Object.keys(current).length > 0 && current.title}</h1>
           </div>
-          <p className="text-center">
-            {current &&
-              Object.keys(current).length > 0 &&
-              current.opening_crawl}
-          </p>
+          <p className="text-center">{current && Object.keys(current).length > 0 && current.opening_crawl}</p>
         </div>
       </div>
     </section>
