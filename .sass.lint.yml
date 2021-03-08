@@ -13,6 +13,7 @@
 # Base Options
 options:
   formatter: stylish
+  
 
 # File Options
 files:
