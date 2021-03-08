@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { getMovies } from 'redux/actions';
-import { MovieSelect, OpenCrawl, CharacterListing } from 'components';
+import { getMovies } from '../redux/actions';
+import { MovieSelect, OpenCrawl, CharacterListing } from '../components';
 import starWarsImage from '../assets/images/star_wars_logo.png';
 
 const Home = () => {
