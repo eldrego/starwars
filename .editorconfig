@@ -7,6 +7,8 @@
 # this is the top-most .editorconfig file; do not search parent directories
 root = true
 
+
+
 # applied to all files
 [*]
 indent_style = space
