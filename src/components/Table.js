@@ -1,5 +1,4 @@
-import React, { useEffect, useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import { formatHeight } from 'utils';
 
 const Table = ({ ...props }) => {

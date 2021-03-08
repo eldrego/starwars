@@ -1,6 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import PropTypes from 'prop-types';
-import { useSelector, useDisptach, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { getCharacter, resetCharacters } from 'redux/actions';
 import Table from './Table';
 import { LoaderEllipsis } from 'components';

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import { useSelector } from 'react-redux';
-import { LoaderRipple } from 'components';
 
 export const OpenCrawl = (props) => {
   const [display, setDisplay] = useState(true);

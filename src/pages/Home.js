@@ -20,7 +20,7 @@ const Home = () => {
           <div className="col-md-4">
             <MovieSelect />
           </div>
-          <div className className="col-md-12">
+          <div className="col-md-12">
             <div className="d-flex w-100 justify-content-center align-items-center pt-5">
               <img className="main-logo" src={starWarsImage} alt="star wars" />
             </div>
