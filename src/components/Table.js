@@ -10,6 +10,9 @@ const Table = ({ ...props }) => {
     if (filteredList && filteredList.length > 0) {
       setEntityListing(filteredList);
     }
+    return () => {
+      setEntityListing([]);
+    };
   }, [filteredList]);
 
   const compareBy = (key, ascending) => {
@@ -26,8 +29,6 @@ const Table = ({ ...props }) => {
     listCopy.sort(compareBy(key, direction));
     setEntityListing(listCopy);
   };
-
-  console.log(filteredList);
 
   return (
     <section className="">
@@ -74,8 +75,7 @@ const Table = ({ ...props }) => {
             </tr>
           </thead>
           <tbody>
-            {entityList &&
-              entityList.length > 0 &&
+            {entityList && entityList.length > 0 ? (
               entityList.map((actor) => {
                 return (
                   <tr key={actor.name}>
@@ -84,7 +84,14 @@ const Table = ({ ...props }) => {
                     <td>{formatHeight(actor.height)}</td>
                   </tr>
                 );
-              })}
+              })
+            ) : (
+              <tr>
+                <th scope="row" colSpan="3">
+                  No content
+                </th>
+              </tr>
+            )}
           </tbody>
 
           <tfoot>

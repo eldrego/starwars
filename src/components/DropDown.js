@@ -54,7 +54,7 @@ export const DropDown = ({ ...props }) => {
         {list &&
           list
             .slice()
-            .sort((a, b) => b.date - a.date)
+            .sort((a, b) => a.date - b.date)
             .map((item) => (
               <li
                 key={item.episode_id}
@@ -63,8 +63,6 @@ export const DropDown = ({ ...props }) => {
                 aria-hidden
               >
                 <span>{item.title}</span>
-                <br />
-                <small>{item.release_date}</small>
               </li>
             ))}
       </ul>
